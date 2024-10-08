@@ -31,7 +31,7 @@ const Navbar = () => {
             setOpen(true);
           }}
         >
-         <MenuIcon className=" text-[3.5rem] "/>
+         <MenuIcon  className="text-[3.5rem] !text-[3.5rem]"/>
         </button>
         <Drawer
           anchor={"right"}
