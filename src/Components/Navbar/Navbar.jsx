@@ -31,7 +31,7 @@ const Navbar = () => {
             setOpen(true);
           }}
         >
-         <MenuIcon className=" text-[2.5rem] "/>
+         <MenuIcon className=" text-[3.5rem] "/>
         </button>
         <Drawer
           anchor={"right"}
@@ -40,7 +40,7 @@ const Navbar = () => {
             setOpen(false);
           }}
         >
-          <div className="flex flex-col w-[100%] bg-gray-700  text-white gap-[2rem] p-[1rem] h-[100vh] justify-center  ">
+          <div className="flex flex-col w-[100%] bg-gray-700  text-white gap-[2rem] p-[1rem] h-[100vh] justify-center text-[1.5rem]  ">
             <Link href="/" onClick={() => {
             setOpen(false);
           }} >Home</Link>
