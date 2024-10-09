@@ -9,7 +9,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <nav className="flex h-[15vh] justify-between pr-8 pl-8 items-center below-sm:pr-2 below-sm:pl-3 " >
+      <nav className="flex h-[10vh] justify-between pr-8 pl-8 items-center below-sm:pr-2 below-sm:pl-3 " >
         <div className="w-[10%] below-sm:w-[30%] ">
             <Image className="w-full" src={Logo} alt="Visra" />
         </div>
@@ -31,7 +31,7 @@ const Navbar = () => {
             setOpen(true);
           }}
         >
-         <MenuIcon className=" text-[3.5rem] "/>
+         <MenuIcon className="text-[3.5rem] !text-[3.5rem]"/>
         </button>
         <Drawer
           anchor={"right"}

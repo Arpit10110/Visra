@@ -3,7 +3,7 @@ import Image from "next/image"
 const Section4 = () => {
   return (
    <>   
-        <div className="flex justify-between pr-[2rem] pl-[2rem] items-center pb-[8rem] below-sm:flex-col below-sm:gap-[4rem] " >
+        <div className="flex justify-between pr-[2rem] pl-[2rem] items-center pb-[5rem] below-sm:flex-col below-sm:gap-[4rem] " >
             <div className="w-[40%] below-sm:w-[90%]" >
                 <Image className="w-full" src={section4Img} alt="sec4"  />
             </div>
