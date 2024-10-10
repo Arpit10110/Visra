@@ -43,10 +43,10 @@ const Section5 = () => {
         return (
             <div className='w-[28%] border-[3px] border-gray-500 rounded-[1rem] p-[1rem] text-[1.1rem] flex
              flex-col justify-center items-center gap-[0.5rem] bg-gray-100 hover:scale-[1.02] transition-all  below-sm:w-[85%] '   key={index} >
-                 <IconComponent className='text-green-500 text-[2rem] below-sm:text-[3rem] '  /> 
+                 <IconComponent className='text-green-500 text-[2rem] below-sm:!text-[2.5rem] '  /> 
                   <h4 className='font-semibold text-[1.3rem] ' >{item.title}</h4> 
                   <p className='text-center' >{item.desc}</p> 
-                  <Link href={`/${item.title}`} >Click me{"->"}</Link>  
+                  <Link className='pb-[0.3rem] pt-[0.3rem] pr-[0.5rem] pl-[0.5rem] bg-blue-600 text-white rounded-[1rem] '  href={`/${item.title}`} >Click me</Link>  
             </div>
         );
       })}
