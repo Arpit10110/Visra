@@ -22,27 +22,27 @@ const page = () => {
   return (
    <>
    <Navbar/>
-   <div className="pb-[10rem]">
+   <div className="">
     <div className='w-full' >
         <Image className='w-full' src={contactUs} alt="ContactUs"  />
     </div>
-    <div className='below-sm:w-[90%] below-sm:top-0 below-sm:p-0    w-[50%] flex flex-col justify-center items-center gap-[1rem] m-auto bg-white relative top-[-5rem] rounded-[1rem] p-[2rem]' >
-        <div className='flex w-[100%] items-center  justify-between below-sm:w-full gap-[2rem] below-sm:pl-[1rem] ' >
+    <div className='below-sm:w-[95%] below-sm:top-[-2.2rem] below-sm:p-[1rem] border-[2px] border-black   w-[50%] flex flex-col justify-center items-center gap-[1rem] m-auto bg-white relative top-[-5rem] rounded-[1rem] p-[2rem]' >
+        <div className='flex w-[100%] items-center  justify-between below-sm:w-full gap-[2rem] below-sm:pl-[0rem] ' >
             <div className='w-[50%] text-[2rem] below-sm:text-[1.3rem] ' >
                 <h2 className='font-semibold' >Love to hear from you, Get in touch👋</h2>
             </div>
             <div className='w-[50%] text-[1.5rem] gap-[1rem] flex flex-col below-sm:text-[1.2rem]' >
                 <h2 className='font-semibold' >Follow Our Social Media</h2>
                 <div className='w-[100%] flex gap-[1rem] ' >
-                    <Image className='w-[10%]  ' src={instagram} alt="Instagram"  />
-                    <Image className='w-[10%]  ' src={facebook} alt="facebook"  />
-                    <Image className='w-[10%]  ' src={linkedin} alt="linkedin"  />
-                    <Image className='w-[10%]  ' src={twitter} alt="twitter"  />
+                    <Image onClick={()=>{window.open("https://www.instagram.com/buydsconline/")}}  className='w-[10%]  ' src={instagram} alt="Instagram"  />
+                    <Image onClick={()=>{window.open("https://www.facebook.com/BuyDSConline")}} className='w-[10%]  ' src={facebook} alt="facebook"  />
+                    <Image onClick={()=>{window.open("https://www.linkedin.com/in/visra-enterprises-3a5845167/")}} className='w-[10%]  ' src={linkedin} alt="linkedin"  />
+                    <Image onClick={()=>{window.open("https://x.com/buydsconline")}} className='w-[10%]  ' src={twitter} alt="twitter"  />
                 </div>
             </div>
         </div>
         <div className='w-full ' >
-            <form className=" w-[100%]   rounded-md  below-sm:w-[95%] below-sm:p-[1rem] flex flex-col gap-[1rem] items-start "   id='myForm' onSubmit={handleSubmit}>
+            <form className=" w-[100%]   rounded-md  below-sm:w-[100%] below-sm:p-[0rem] flex flex-col gap-[1rem] items-start "   id='myForm' onSubmit={handleSubmit}>
                 <div className=" flex gap-[2rem] w-full  ">
                     <div className='w-[50%]' >
                     <h2>First Name</h2>
