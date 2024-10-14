@@ -1,7 +1,7 @@
 "use client"
 
 import Navbar from '@/Components/Navbar/Navbar'
-import React,{useState} from 'react'
+import React from 'react'
 import { useForm} from '@formspree/react';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -67,7 +67,7 @@ const page = () => {
                     <h2>Message</h2>
                     <input className='bg-gray-50 w-full h-[30vh] text-center p-[0.2rem] text-[1.2rem] rounded-[10px] ' type="text" name='Message'   required/>
                 </div>
-                <button className='bg-gray-800 p-[0.6rem] w-fit p-l-[1rem] pr-[1rem] text-center text-[1.1rem] font-semibold text-white  cursor-pointer border-none ' >Send Messgae</button>
+                <button className='bg-gray-800 p-[0.6rem] w-fit p-l-[1rem] pr-[1rem] text-center text-[1.1rem] font-semibold text-white  cursor-pointer border-none ' >Send Message</button>
             </form>
         </div>
     </div>

@@ -17,7 +17,7 @@ const Navbar = () => {
 
         <div className="navlinks flex gap-9 text-[1.1rem] below-sm:hidden  ">
             <Link className="hover:text-red-400" href={"/"}>Home</Link>
-            <Link className="hover:text-red-400" href={"/buy-certificate"}>Buy Certificate</Link>
+            <Link className="hover:text-red-400" href={"/buycertificate"}>Buy Certificate</Link>
             <Link className="hover:text-red-400" href={"/doucment-signer"}>Document Signer</Link>
             <Link className="hover:text-red-400" href={"/download"}>Download</Link>
             <Link className="hover:text-red-400" href={"/become-a-partner"}>Become a Partner</Link>

@@ -1,0 +1,70 @@
+.buy-Certificate-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 3rem 6rem 3rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.section-main {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 1rem;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sector-btn-div{
+    display:flex;
+    gap:1rem;
+}
+.section button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.section button.active {
+  background-color: #206fd7;
+  color: white;
+}
+
+.section button:hover {
+  background-color: #ddd;
+}
+
+.summary {
+  width: 40%;
+}
+
+.summary h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+table,
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+table td {
+  font-size: 16px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
