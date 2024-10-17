@@ -11,6 +11,10 @@
   flex-direction: column;
   align-items: baseline;
   gap: 1rem;
+  padding: 1rem;
+  box-shadow: -2px 2px 10px 6px rgb(0 0 0 / 34%), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  background-color: #80808017;
 }
 .section {
   display: flex;
@@ -26,20 +30,32 @@
   border: 1px solid #ccc;
   padding: 10px 20px;
   cursor: pointer;
+  display: flex;
   transition: background-color 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 10px;
 }
 
 .section button.active {
-  background-color: #206fd7;
+  background-color: #3085f4;
   color: white;
+  border: 2px solid #21ff21;
 }
 
 .section button:hover {
   background-color: #ddd;
+  scale: 1.02;
+  color: black;
+  transition: all;
 }
 
 .summary {
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .summary h3 {
@@ -67,4 +83,74 @@ table td {
 
 table tr:nth-child(even) {
   background-color: #f9f9f9;
+}
+.summary a{
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem;
+  box-shadow: -2px 2px 10px 6px rgb(0 0 0 / 33%), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 10px;
+  background-color: #01b801;
+  border: none;
+}
+
+.buy-certicate-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 95%;
+  background-color: #80808017;
+  margin: auto;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 5rem;
+}
+
+.buy-certi-divs{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+.buy-certi-divs h1{
+  color:  #108DC6;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.buy-certicate-contactBox{
+  width: 90%;
+  padding: 2rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #3085f4;
+  color: white;
+  border-radius: 1rem;
+  margin-bottom: 5rem;
+  box-shadow: -2px 2px 10px 6px rgb(0 0 0 / 34%), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.buy-certicate-contactBox h1{
+  font-weight: bold;
+  font-size: 2rem;
+}
+.buy-certicate-contactBox a {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: #ff0000e0;
+}
+.buy-certicate-contactBox p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #ffffffab;
+  width: 80%;
 }
