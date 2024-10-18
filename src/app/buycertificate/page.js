@@ -72,7 +72,8 @@ const page = () => {
   return (
     <>
       <Navbar />
-      <Image src={buyCertiBanner} alt="buyCertiBanner"  />
+      <Image className='below-sm:hidden' src={buyCertiBanner} alt="buyCertiBanner"  />
+      <h1 className='hidden below-sm:flex below-sm:mt-[2rem] below-sm:text-[2rem] below-sm:border-b-[3px] w-fit  below-sm:border-red-300 below-sm:ml-[1rem] font-semibold text-blue-400 ' >👉Buy Certificate</h1>
       <div className="buy-Certificate-main">
       <div className="section-main">
         {/* Profile Selection */}

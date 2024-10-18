@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex h-[15vh] justify-between pr-8 pl-8 items-center below-sm:pr-2 below-sm:pl-3 " >
-        <div className="w-[7%] below-sm:w-[20%] ">
+        <div className="w-[7%] below-sm:w-[20%]  ">
             <Image className="w-full" src={Logo} alt="Visra" />
         </div>
 
@@ -44,10 +44,10 @@ const Navbar = () => {
             <Link href="/" onClick={() => {
             setOpen(false);
           }} >Home</Link>
-            <Link href="/projects" onClick={() => {
+            <Link href={"/buycertificate"} onClick={() => {
             setOpen(false);
           }}>Buy Certificate</Link>
-            <Link href="/skill" onClick={() => {
+            <Link href="/buycertificate" onClick={() => {
             setOpen(false);
           }}>Document Signer</Link>
             <Link href="/certificate" onClick={() => {
