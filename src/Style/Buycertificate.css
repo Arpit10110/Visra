@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 3rem 3rem 6rem 3rem;
     flex-wrap: wrap;
+    gap: 3rem;
     align-items: center;
 }
 .section-main {
@@ -23,6 +24,7 @@
 }
 .sector-btn-div{
     display:flex;
+    flex-wrap: wrap;
     gap:1rem;
 }
 .section button {

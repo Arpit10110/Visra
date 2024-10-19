@@ -48,6 +48,30 @@ const page = () => {
     { productType: "Sign & Encryprion", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 2033.9, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 503.39, Total_Amount: 3299.99 },
     { productType: "Sign & Encryprion", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 3135.59, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 701.69, Total_Amount: 4599.98 },
   ];
+  const Foreign_O = [
+    { productType: "sign", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 847.46, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 289.83, Total_Amount: 1899.99 },
+    { productType: "sign", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 974.58, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 312.71, Total_Amount: 2049.99 },
+    { productType: "sign", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 1483.05, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 404.23, Total_Amount: 2649.98 },
+    { productType: "Sign & Encryprion", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 1694.92, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 442.37, Total_Amount: 2899.99 },
+    { productType: "Sign & Encryprion", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 2033.9, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 503.39, Total_Amount: 3299.99 },
+    { productType: "Sign & Encryprion", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 3135.59, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 701.69, Total_Amount: 4599.98 },
+  ];
+  const Foreign_I = [
+    { productType: "sign", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 847.46, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 289.83, Total_Amount: 1899.99 },
+    { productType: "sign", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 974.58, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 312.71, Total_Amount: 2049.99 },
+    { productType: "sign", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 1483.05, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 404.23, Total_Amount: 2649.98 },
+    { productType: "Sign & Encryprion", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 1694.92, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 442.37, Total_Amount: 2899.99 },
+    { productType: "Sign & Encryprion", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 2033.9, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 503.39, Total_Amount: 3299.99 },
+    { productType: "Sign & Encryprion", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 3135.59, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 701.69, Total_Amount: 4599.98 },
+  ];
+  const Document_Sign = [
+    { productType: "sign", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 847.46, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 289.83, Total_Amount: 1899.99 },
+    { productType: "sign", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 974.58, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 312.71, Total_Amount: 2049.99 },
+    { productType: "sign", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 1483.05, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 404.23, Total_Amount: 2649.98 },
+    { productType: "Sign & Encryprion", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 1694.92, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 442.37, Total_Amount: 2899.99 },
+    { productType: "Sign & Encryprion", validity: 2, Tocken: true, Assistance_Service: true, DSC_Price: 2033.9, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 503.39, Total_Amount: 3299.99 },
+    { productType: "Sign & Encryprion", validity: 3, Tocken: true, Assistance_Service: true, DSC_Price: 3135.59, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 701.69, Total_Amount: 4599.98 },
+  ];
 
   const getFilteredDSC = () => {
     let dataSource;
@@ -55,7 +79,10 @@ const page = () => {
       dataSource = individualOrganization;
     } else if (profile === "IET") {
       dataSource = DGFT_DSC;
-    } else {
+    }else if(profile === "Document_Signer " || profile === "Foreign_Individual" || profile === " Foreign_Oraganization"){
+      dataSource = Foreign_O ;
+    }
+     else {
       dataSource = GOVT_DSC;
     }
 
@@ -85,6 +112,9 @@ const page = () => {
           <button onClick={() => setProfile('Organization')} className={profile === 'Organization' ? 'active' : ''}><BalanceIcon/>Organization</button>
           <button onClick={() =>{ setClassify("Sign & Encryprion"); setProfile('IET')} } className={profile === 'IET' ? 'active' : ''}><PublicIcon/>IET (DGFT)</button>
           <button onClick={() => setProfile('Government')} className={profile === 'Government' ? 'active' : ''}><AccountBalanceIcon/>Government</button>
+          <button onClick={() => setProfile('Foreign_Oraganization')} className={profile === 'Foreign_Oraganization' ? 'active' : ''}><AccountBalanceIcon/>Foreign Oraganization</button>
+          <button onClick={() => setProfile('Foreign_Individual')} className={profile === 'Foreign_Individual' ? 'active' : ''}><AccountBalanceIcon/>Foreign Individual</button>
+          <button onClick={() => setProfile('Document_Signer')} className={profile === 'Document_Signer' ? 'active' : ''}><AccountBalanceIcon/>Document Signer</button>
         </div>
         </div>
         {/* Classify */}
