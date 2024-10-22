@@ -18,12 +18,30 @@ import UsbIcon from '@mui/icons-material/Usb';
 import UsbOffIcon from '@mui/icons-material/UsbOff';
 import AssistantIcon from '@mui/icons-material/Assistant';
 import DangerousIcon from '@mui/icons-material/Dangerous';
+import {useDispatch} from "react-redux"
 const page = () => {
+  const dispatch = useDispatch();
   const [profile, setProfile] = useState('Individual');
   const [classify, setClassify] = useState('Sign');
   const [years, setYears] = useState(1);
   const [token, setToken] = useState(true); // USB Token or No Token
   const [assistance, setAssistance] = useState(true); // Assistance Service or No Assistance
+
+  const Buycertificate = ()=>{
+  const purchaseDetails = {
+    profile,  
+    classify, 
+    years,     
+    token,     
+    assistance, 
+    price:filteredDSC
+};
+    console.log(purchaseDetails)
+    dispatch({
+      type:"addtocart",
+      payload:purchaseDetails
+    })
+  }
 
   const individualOrganization = [
     { productType: "sign", validity: 1, Tocken: true, Assistance_Service: true, DSC_Price: 847.46, Token_Price: 423.72, Asst_Service_Price: 338.98, Gst: 289.83, Total_Amount: 1899.99 },
@@ -191,7 +209,7 @@ const page = () => {
           ) : (
             <p>No matching records found. Please adjust your selections.</p>
           )}
-          <Link href="/buynow" >Buy Certificate</Link>
+          <button onClick={Buycertificate}>Buy Certificate</button>
         </div>
       </div>
       <div className="buy-certicate-cont">
