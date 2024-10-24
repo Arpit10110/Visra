@@ -86,7 +86,7 @@ table td {
 table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-.summary a{
+.summary button{
   width: 100%;
   text-align: center;
   padding: 0.4rem;
