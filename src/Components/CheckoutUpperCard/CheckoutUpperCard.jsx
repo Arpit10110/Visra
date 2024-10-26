@@ -76,10 +76,10 @@ const CheckoutUpperCard = ({ profile, assistance, classify, token, years }) => {
             )}
           </div>
         </div>
-        <div className="flex gap-[0.5rem] items-end border-[2px] border-black rounded-[5px] p-[0.5rem] " >
+        <Link href="/buycertificate" className="flex gap-[0.5rem] items-end border-[2px] border-black rounded-[5px] p-[0.5rem] " >
         <EditIcon className="border-[1px] border-black rounded-[3px] p-[0.2rem] !text-[1.7rem] " />
-        <Link href="/buycertificate" className="text-[1.3rem] " >Change</Link>
-        </div>
+        <h2 href="/buycertificate" className="text-[1.3rem] " >Change</h2>
+        </Link>
       </div>
     </>
   );
