@@ -11,8 +11,6 @@ const Page = () => {
   const [showIndividualForm, setShowIndividualForm] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const { cart } = useSelector(state => state.Visra);
-
-  // Persist cart to localStorage on the client
   usePersistCart(cart);
 
   useEffect(() => {

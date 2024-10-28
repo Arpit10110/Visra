@@ -35,7 +35,7 @@ const OrganizationForm = ({cart}) => {
 
             <div className='text-[1.2rem] flex  gap-[0.2rem]  w-full justify-between '>
                     <div className='w-[48%]'>
-                    <h3>organization type</h3>
+                    <h3>Organization type</h3>
                     <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                     <div className='w-[48%]'>
