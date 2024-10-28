@@ -1,34 +1,57 @@
-'use client'
-import Navbar from '@/Components/Navbar/Navbar'
-import { useState,useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import CheckoutUpperCard from '@/Components/CheckoutUpperCard/CheckoutUpperCard'
-import IndidvidualForm from '@/Components/IndidvidualForm/IndidvidualForm'
-import OrganizationForm from '@/Components/OrganizationForm/OrganizationForm'
-const page = () => {
-    const [ShowindividualForm,SetShowindividualForm] =useState(true);
-    const { cart } = useSelector(state => state.Visra);
-    useEffect(() => {
-      console.log(cart[0])
-      if (cart && cart[0]) {
-        if (cart[0].profile === "Individual" || cart[0].profile === "Foreign_Individual") {
-          SetShowindividualForm(true);
-        } else {
-          SetShowindividualForm(false);
-        }
-      }
-    }, []);
-  return (
-   <>
-   <Navbar/>
-   <div>
-        <CheckoutUpperCard profile={cart[0].profile} assistance={cart[0].assistance} classify={cart[0].classify} token={cart[0].token} years={cart[0].years} />
-            {
-              ShowindividualForm === true ? <IndidvidualForm cart={cart[0].price} /> : <OrganizationForm />
-            }
-   </div>
-   </>
-  )
-}
+'use client';
+import Navbar from '@/Components/Navbar/Navbar';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import CheckoutUpperCard from '@/Components/CheckoutUpperCard/CheckoutUpperCard';
+import IndidvidualForm from '@/Components/IndidvidualForm/IndidvidualForm';
+import OrganizationForm from '@/Components/OrganizationForm/OrganizationForm';
+import { usePersistCart } from '@/Store/Reducer';
 
-export default page
+const Page = () => {
+  const [showIndividualForm, setShowIndividualForm] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
+  const { cart } = useSelector(state => state.Visra);
+
+  // Persist cart to localStorage on the client
+  usePersistCart(cart);
+
+  useEffect(() => {
+    setIsMounted(true); // Component is now mounted on client side
+  }, []);
+
+  useEffect(() => {
+    if (cart && cart[0]) {
+      setShowIndividualForm(
+        cart[0].profile === "Individual" || cart[0].profile === "Foreign_Individual"
+      );
+    }
+  }, [cart]);
+
+  if (!isMounted) return null; // Prevent rendering until client-side mount
+
+  return (
+    <>
+      <Navbar />
+      <div>
+        {cart && cart[0] && (
+          <>
+            <CheckoutUpperCard 
+              profile={cart[0].profile} 
+              assistance={cart[0].assistance} 
+              classify={cart[0].classify} 
+              token={cart[0].token} 
+              years={cart[0].years} 
+            />
+            {showIndividualForm ? (
+              <IndidvidualForm cart={cart[0].price} />
+            ) : (
+              <OrganizationForm />
+            )}
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Page;
