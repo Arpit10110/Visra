@@ -11,18 +11,19 @@ const IndidvidualForm = ({cart}) => {
     const [State,SetState] = useState("");
     const [PostalCode,SetPostalCode] = useState("");
 
-    console.log(cart);
-
     const SubmitForm = async(e)=>{
         e.preventDefault();
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
         try {
-            const {data} = await axios.post("/api/addindividual",{
-                name:Name,
-                phone:Phone,
-                email:Email,
-                address:sendaddres
-            });
+            // const {data} = await axios.post("/api/addindividual",{
+            //     name:Name,
+            //     phone:Phone,
+            //     email:Email,
+            //     address:sendaddres
+            // });
+            const {data} = await axios.post("/api/testing",{
+                name:"Arpit"
+            })
             console.log(data)
         } catch (error) {
             console.log(error)
