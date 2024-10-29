@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import axios from "axios"
-const IndidvidualForm = ({cart}) => {
+const IndidvidualForm = ({cart,fullcart}) => {
     const [Name,SetName] = useState("");
     const [Email,SetEmail] =useState("");
     const [Phone,SetPhone] = useState("");
@@ -15,25 +15,18 @@ const IndidvidualForm = ({cart}) => {
         e.preventDefault();
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
         try {
-            // const {data} = await axios.post("/api/addindividual",{
-            //     name:Name,
-            //     phone:Phone,
-            //     email:Email,
-            //     address:sendaddres
-            // });
-            const {data} = await axios.post("/api/testing",{
-                name:"Arpit"
-            })
+            const {data} = await axios.post("/api/addindividual",{
+                name:Name,
+                phone:Phone,
+                email:Email,
+                address:sendaddres,
+                cart:fullcart
+            });
             console.log(data)
         } catch (error) {
             console.log(error)
         }
     }
-
-
-
-
-
     return (
     <>
         <form onSubmit={SubmitForm} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] "   >

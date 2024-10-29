@@ -1,16 +1,35 @@
 import connectdb from "@/dataBase";
-import IndividualModal from "@/Model/IndividualSchema";
+import VisraOrderModel from "@/Model/IndividualSchema";
 import { NextResponse } from "next/server";
 
 export const POST = async(req)=>{
     try {
-        connectdb();
-        const {name,phone,email,address} =await req.json();
-        await IndividualModal.create({
-           name:name,
-           phone:phone,
-           email:email,
-           address:address
+        await connectdb();
+        const {name,phone,email,address,cart} =await req.json();
+        const userinfo = {
+            name:name,
+            phone:phone,
+            email:email,
+            address:address
+        }
+        const orderinfo = {
+            profile:cart[0].profile,
+            classify:cart[0].classify,
+            year:cart[0].years,
+            token:cart[0].token,
+            assistance:cart[0].assistance
+        }
+        const priceinfo = {
+            dscprice:cart[0].price.DSC_Price,
+            assprice:cart[0].price.Asst_Service_Price,
+            tokenprice:cart[0].price.Token_Price,
+            gst:cart[0].price.Gst,
+            totalprice:cart[0].price.Total_Amount,
+        }
+        await VisraOrderModel.create({
+            order:orderinfo,
+            user:userinfo,
+            price:priceinfo,
         })
         return(
             NextResponse.json({

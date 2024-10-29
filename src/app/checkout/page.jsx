@@ -41,7 +41,7 @@ const Page = () => {
               years={cart[0].years} 
             />
             {showIndividualForm ? (
-              <IndidvidualForm cart={cart[0].price} />
+              <IndidvidualForm fullcart={cart} cart={cart[0].price} />
             ) : (
               <OrganizationForm cart={cart[0].price} />
             )}
