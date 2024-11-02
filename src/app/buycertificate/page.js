@@ -23,7 +23,7 @@ import DangerousIcon from "@mui/icons-material/Dangerous";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-const page = () => {
+const page = () => { 
   const dispatch = useDispatch();
   const router=useRouter();
   const [profile, setProfile] = useState("Individual");

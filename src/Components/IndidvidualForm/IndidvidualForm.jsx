@@ -1,7 +1,9 @@
 'use client'
 import { useState } from "react";
 import axios from "axios"
+import { useRouter } from "next/navigation";
 const IndidvidualForm = ({cart,fullcart}) => {
+    const router=useRouter();
     const [Name,SetName] = useState("");
     const [Email,SetEmail] =useState("");
     const [Phone,SetPhone] = useState("");
@@ -11,8 +13,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
     const [State,SetState] = useState("");
     const [PostalCode,SetPostalCode] = useState("");
 
-    const SubmitForm = async(e)=>{
-        e.preventDefault();
+    const SubmitForm = async(paymentid)=>{
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
         try {
             const {data} = await axios.post("/api/addindividual",{
@@ -20,17 +21,63 @@ const IndidvidualForm = ({cart,fullcart}) => {
                 phone:Phone,
                 email:Email,
                 address:sendaddres,
-                cart:fullcart
+                cart:fullcart,
+                paymentid:paymentid
             });
-            console.log(data)
+            router.push("/successorder")
         } catch (error) {
             console.log(error)
         }
     }
+    const createpayment = async(e)=>{
+        e.preventDefault();
+        const amount = fullcart[0].price.Total_Amount;
+        const {data:{order}}= await axios.post("/api/createpayment",{
+            amount
+          })
+          const options = {
+            key: process.env.NEXT_PUBLIC_RazarPay_key_id, 
+            amount: order.amount,  
+            currency: "INR",
+            name: "Visra",
+            description: "Test Transaction",
+            image: "https://visra.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.967247f3.png&w=3840&q=75",
+            order_id: order.id, 
+            handler: async function (response){
+               try {
+                    const {data} = await axios.post("/api/paymentverification",{
+                        razorpay_payment_id:response.razorpay_payment_id,
+                        razorpay_order_id:response.razorpay_order_id,
+                        razorpay_signature:response.razorpay_signature
+                    }) 
+                    console.log(data);
+                    if(data.success == true){
+                        SubmitForm(data.paymentId)
+                    }
+               } catch (error) {
+                console.log(error)
+               }
+            },
+            prefill: {
+                name: Name,
+                email: Email,
+                contact: Phone
+            },
+            notes: {
+                address: "Razorpay Corporate Office"
+            },
+            theme: {
+                color: "#3399cc"
+            }
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+        
+    }
     return (
     <>
-        <form onSubmit={SubmitForm} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] "   >
-            <div className=' w-[50%] rounded-[5px] overflow-hidden '>
+        <form onSubmit={createpayment} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] below-sm:w-[100%] below-sm:items-center below-sm:gap-[3rem] below-sm:flex-col "   >
+            <div className=' w-[50%] rounded-[5px] overflow-hidden below-sm:w-[95%]  '>
                 <h1 className='bg-blue-500 text-white p-[0.2rem] ' >Personal & Address Details</h1>
                 <div className='w-full p-[1rem] bg-gray-100 pt-[1rem]  flex flex-col gap-[1rem]  ' >
                 <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  ' >
@@ -71,7 +118,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
                     </div>
                 </div>
             </div>
-            <div className='w-[30%] flex flex-col gap-[1rem] ' >
+            <div className='w-[30%] flex flex-col gap-[1rem] below-sm:w-[95%] ' >
                 <div className='border-[1px] border-gray-600 w-full rounded-[5px] overflow-hidden bg-gray-50 ' >
                     <h2 className='p-[0.2rem] text-[1.3rem] bg-[#DFF1F8] ' >Payment Summary</h2>
                     <div className='flex w-full justify-between  border-t-[1px]  border-gray-600   ' >

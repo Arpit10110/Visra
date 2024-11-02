@@ -27,8 +27,9 @@ const Schema = new mongoose.Schema({
     order: { type: OrderSchema, required: true },
     user: { type: UserSchema, required: true },
     price: { type: PriceSchema, required: true },
+    paymentid:{ type: String, required: true}
 });
 
-const VisraOrderModel = mongoose.models.VisraOrderModel || mongoose.model('VisraOrderModel', Schema);
+const VisraOrderModel = mongoose.models.IndividualOrderModel || mongoose.model('IndividualOrderModel', Schema);
 export default VisraOrderModel;
 

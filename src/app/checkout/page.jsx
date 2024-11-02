@@ -6,7 +6,7 @@ import CheckoutUpperCard from '@/Components/CheckoutUpperCard/CheckoutUpperCard'
 import IndidvidualForm from '@/Components/IndidvidualForm/IndidvidualForm';
 import OrganizationForm from '@/Components/OrganizationForm/OrganizationForm';
 import { usePersistCart } from '@/Store/Reducer';
-
+import Script from 'next/script';
 const Page = () => {
   const [showIndividualForm, setShowIndividualForm] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
@@ -31,6 +31,7 @@ const Page = () => {
     <>
       <Navbar />
       <div>
+    <Script src="https://checkout.razorpay.com/v1/checkout.js"  />
         {cart && cart[0] && (
           <>
             <CheckoutUpperCard 

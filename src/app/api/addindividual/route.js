@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const POST = async(req)=>{
     try {
         await connectdb();
-        const {name,phone,email,address,cart} =await req.json();
+        const {name,phone,email,address,cart,paymentid} =await req.json();
         const userinfo = {
             name:name,
             phone:phone,
@@ -30,6 +30,7 @@ export const POST = async(req)=>{
             order:orderinfo,
             user:userinfo,
             price:priceinfo,
+            paymentid:paymentid
         })
         return(
             NextResponse.json({
