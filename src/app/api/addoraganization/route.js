@@ -1,19 +1,18 @@
 import connectdb from "@/dataBase";
-import VisraOrderModel from "@/Model/IndividualSchema";
+import OrgOrderModel from "@/Model/OrganizationModel";
 import { NextResponse } from "next/server";
 
 export const POST = async(req)=>{
     try {
         await connectdb();
-        const {name,phone,email,address,cart,paymentid} =await req.json();
+        const {name,phone,email,address,cart,paymentid,orgname,orgtype,departname,gstno} =await req.json();
         let tt=cart[0].price.Total_Amount;
         if(cart[0].token== true){
             tt= 423.72+tt;
            }
-           if(cart[0].assistance == true){
+        if(cart[0].assistance == true){
            tt= 338.98+tt;
            }
-           console.log("this is the value of:-",tt);
         const userinfo = {
             name:name,
             phone:phone,
@@ -34,10 +33,17 @@ export const POST = async(req)=>{
             gst:cart[0].price.Gst,
             totalprice:tt,
         }
-        await VisraOrderModel.create({
+        const orginfo = {
+            departmentname:departname,
+            orgname:orgname,
+            orgtype:orgtype,
+            gstno:gstno
+        }
+        await OrgOrderModel.create({
             order:orderinfo,
             user:userinfo,
             price:priceinfo,
+            oragdetail:orginfo,
             paymentid:paymentid
         })
         return(

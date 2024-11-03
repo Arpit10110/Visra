@@ -1,73 +1,189 @@
-import React from 'react'
+'use client'
+import { useState,useEffect } from "react";
+import axios from "axios"
+import { useRouter } from "next/navigation";
+const OrganizationForm = ({cart,fullcart}) => {
+    const router=useRouter();
+    const [Name,SetName] = useState("");
+    const [Email,SetEmail] =useState("");
+    const [Phone,SetPhone] = useState("");
+    const [Address,SetAddress] = useState("");
+    const [Landmark,SetLandmark] = useState("");
+    const [City,SetCity] = useState("");
+    const [State,SetState] = useState("");
+    const [PostalCode,SetPostalCode] = useState("");
+    const [Orgname,SetOrgname] = useState("");
+    const [Orgtype,SetOrgtype] = useState("");
+    const [Gstno,SetGstno] = useState("");
+    const [departname,Setdepartname] = useState("");
+    const [TotalAmount,SetTotalAmount] = useState(0);
 
-const OrganizationForm = ({cart}) => {
+
+    const SubmitForm = async(paymentid)=>{
+        const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
+        let gstno ;
+        if(Gstno == ""){
+            gstno="N/A";
+        }else{
+            gstno=Gstno;
+        }
+        try {
+            const {data} = await axios.post("/api/addoraganization",{
+                name:Name,
+                phone:Phone,
+                email:Email,
+                address:sendaddres,
+                cart:fullcart,
+                paymentid:paymentid,
+                orgname:Orgname,
+                orgtype:Orgtype,
+                departname:departname,
+                gstno:gstno
+            });
+            console.log(data);
+            sendnotifation();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+    const createpayment = async(e)=>{
+        e.preventDefault();
+        const amount = TotalAmount
+        const {data:{order}}= await axios.post("/api/createpayment",{
+            amount
+          })
+          const options = {
+            key: process.env.NEXT_PUBLIC_RazarPay_key_id, 
+            amount: order.amount,  
+            currency: "INR",
+            name: "Visra",
+            description: "Test Transaction",
+            image: "https://visra.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.967247f3.png&w=3840&q=75",
+            order_id: order.id, 
+            handler: async function (response){
+               try {
+                    const {data} = await axios.post("/api/paymentverification",{
+                        razorpay_payment_id:response.razorpay_payment_id,
+                        razorpay_order_id:response.razorpay_order_id,
+                        razorpay_signature:response.razorpay_signature
+                    }) 
+                    console.log(data);
+                    if(data.success == true){
+                        SubmitForm(data.paymentId)
+                    }
+               } catch (error) {
+                console.log(error)
+               }
+            },
+            prefill: {
+                name: Name,
+                email: Email,
+                contact: Phone
+            },
+            notes: {
+                address: "Razorpay Corporate Office"
+            },
+            theme: {
+                color: "#3399cc"
+            }
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+        
+    }
+
+    const sendnotifation = async()=>{
+        try {
+            const data = await axios.post("https://formspree.io/f/mbljrvae",{
+                name:Name,
+                phone:Phone,
+                email:Email,
+                message:`New Order placed successfully by ${Name}`
+            })
+            router.push("/successorder")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+  useEffect(() => {
+        let tt=cart.Total_Amount;
+        if(fullcart[0].token== true){
+         tt= 423.72+tt;
+        }
+        if(fullcart[0].assistance == true){
+        tt= 338.98+tt;
+        }
+        SetTotalAmount(tt);
+  }, [])
+  
+
+
   return (
     <>
-    <form onSubmit={(e)=>{
-        e.preventDefault();
-    }} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] "   >
+    <form onSubmit={createpayment} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] "   >
         <div className=' w-[50%] rounded-[5px] overflow-hidden '>
             <h1 className='bg-blue-500 text-white p-[0.2rem] ' >Personal & Address Details</h1>
             <div className='w-full p-[1rem] bg-gray-100 pt-[1rem]  flex flex-col gap-[1rem]  ' >
             <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  ' >
             <h3>Name</h3>
-            <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] '  type="text" required />
+            <input value={Name} onChange={(e)=>SetName(e.target.value)} className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] '  type="text" required />
             </div>
             <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  ' >
             <h3>Email ID</h3>
-            <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="email" required/>
+            <input value={Email} onChange={(e)=>SetEmail(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="email" required/>
             </div>
             <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  '>
             <h3>Phone Number</h3>
-            <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required />
+            <input value={Phone} onChange={(e)=>SetPhone(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required />
             </div>
 
             <div className='text-[1.2rem] flex  gap-[0.2rem]  w-full justify-between '>
                     <div className='w-[48%]'>
                     <h3>Organization name</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={Orgname} onChange={(e)=>SetOrgname(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                     <div className='w-[48%]'>
                     <h3>Department  name</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={departname} onChange={(e)=>Setdepartname(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                 </div>
 
             <div className='text-[1.2rem] flex  gap-[0.2rem]  w-full justify-between '>
                     <div className='w-[48%]'>
                     <h3>Organization type</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={Orgtype} onChange={(e)=>SetOrgtype(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                     <div className='w-[48%]'>
                     <h3>Gst number(optional)</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={Gstno} onChange={(e)=>SetGstno(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text"/>
                     </div>
                 </div>
-
-
-
             <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  '>
             <h3>Address</h3>
-            <textarea className='w-[100%] min-h-[20vh] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+            <textarea value={Address} onChange={(e)=>SetAddress(e.target.value)}  className='w-[100%] min-h-[20vh] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
             </div>
                 <div className='text-[1.2rem] flex  gap-[0.2rem] w-full justify-between ' >
                     <div className='w-[48%]' >
                     <h3>Landmark</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] '  type="text" required/>
+                    <input value={Landmark} onChange={(e)=>SetLandmark(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] '  type="text" required/>
                     </div>
                     <div className='w-[48%]' >
                     <h3>Postal Code</h3>
-                    <input  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={PostalCode} onChange={(e)=>SetPostalCode(e.target.value)}   className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                 </div>
                 <div className='text-[1.2rem] flex  gap-[0.2rem]  w-full justify-between '>
                     <div className='w-[48%]'>
                     <h3>City</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={City} onChange={(e)=>SetCity(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                     <div className='w-[48%]'>
                     <h3>State</h3>
-                    <input className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    <input value={State} onChange={(e)=>SetState(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                 </div>
             </div>
@@ -89,7 +205,7 @@ const OrganizationForm = ({cart}) => {
                 </div>
                 <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
                     <h2 className='w-[70%] p-[0.3rem] text-[1.1rem] font-semibold  border-r-[1px] border-gray-600 ' >Payable Amount</h2>
-                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{cart.Total_Amount}</h2>
+                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{TotalAmount}</h2>
                 </div>
             </div>
             <button type='submit' className='bg-blue-500 text-white text-[1.2rem] p-[0.3rem] rounded-[5px] ' >Pay Now</button>

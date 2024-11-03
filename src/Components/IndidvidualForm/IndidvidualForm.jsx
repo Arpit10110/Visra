@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 const IndidvidualForm = ({cart,fullcart}) => {
@@ -12,9 +12,10 @@ const IndidvidualForm = ({cart,fullcart}) => {
     const [City,SetCity] = useState("");
     const [State,SetState] = useState("");
     const [PostalCode,SetPostalCode] = useState("");
-
+    const [TotalAmount,SetTotalAmount] = useState(0);
+ 
     const SubmitForm = async(paymentid)=>{
-        const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
+        const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode;
         try {
             const {data} = await axios.post("/api/addindividual",{
                 name:Name,
@@ -22,16 +23,17 @@ const IndidvidualForm = ({cart,fullcart}) => {
                 email:Email,
                 address:sendaddres,
                 cart:fullcart,
-                paymentid:paymentid
+                paymentid:paymentid,
             });
-            router.push("/successorder")
+            console.log(data);
+            sendnotifation();
         } catch (error) {
             console.log(error)
         }
     }
     const createpayment = async(e)=>{
         e.preventDefault();
-        const amount = fullcart[0].price.Total_Amount;
+        const amount = TotalAmount;
         const {data:{order}}= await axios.post("/api/createpayment",{
             amount
           })
@@ -50,7 +52,6 @@ const IndidvidualForm = ({cart,fullcart}) => {
                         razorpay_order_id:response.razorpay_order_id,
                         razorpay_signature:response.razorpay_signature
                     }) 
-                    console.log(data);
                     if(data.success == true){
                         SubmitForm(data.paymentId)
                     }
@@ -74,6 +75,32 @@ const IndidvidualForm = ({cart,fullcart}) => {
         rzp1.open();
         
     }
+
+    const sendnotifation = async()=>{
+        try {
+            const data = await axios.post("https://formspree.io/f/mbljrvae",{
+                name:Name,
+                phone:Phone,
+                email:Email,
+                message:`New Order placed successfully by ${Name}`
+            })
+            router.push("/successorder")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        let tt=cart.Total_Amount;
+        if(fullcart[0].token== true){
+         tt= 423.72+tt;
+        }
+        if(fullcart[0].assistance == true){
+        tt= 338.98+tt;
+        }
+        SetTotalAmount(tt);
+  }, [])
+
     return (
     <>
         <form onSubmit={createpayment} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] below-sm:w-[100%] below-sm:items-center below-sm:gap-[3rem] below-sm:flex-col "   >
@@ -135,7 +162,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
                     </div>
                     <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
                         <h2 className='w-[70%] p-[0.3rem] text-[1.1rem] font-semibold  border-r-[1px] border-gray-600 ' >Payable Amount</h2>
-                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{cart.Total_Amount}</h2>
+                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{TotalAmount}</h2>
                     </div>
                 </div>
                 <button type='submit' className='bg-blue-500 text-white text-[1.2rem] p-[0.3rem] rounded-[5px] ' >Pay Now</button>
