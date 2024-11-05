@@ -103,8 +103,8 @@ const IndidvidualForm = ({cart,fullcart}) => {
 
     return (
     <>
-        <form onSubmit={createpayment} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] below-sm:w-[100%] below-sm:items-center below-sm:gap-[3rem] below-sm:flex-col "   >
-            <div className=' w-[50%] rounded-[5px] overflow-hidden below-sm:w-[95%]  '>
+        <form onSubmit={createpayment} className="flex justify-between m-auto w-[95%] pt-[3rem] pb-[5rem] below-sm:w-[100%] below-sm:items-center below-sm:gap-[3rem] below-sm:flex-col below-tab:w-[99%]  "   >
+            <div className=' w-[50%] rounded-[5px] overflow-hidden below-sm:w-[95%] below-tab:w-[63%]  '>
                 <h1 className='bg-blue-500 text-white p-[0.2rem] ' >Personal & Address Details</h1>
                 <div className='w-full p-[1rem] bg-gray-100 pt-[1rem]  flex flex-col gap-[1rem]  ' >
                 <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  ' >
@@ -145,7 +145,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
                     </div>
                 </div>
             </div>
-            <div className='w-[30%] flex flex-col gap-[1rem] below-sm:w-[95%] ' >
+            <div className='w-[40%] flex flex-col gap-[1rem] below-sm:w-[95%] below-tab:w-[35%] ' >
                 <div className='border-[1px] border-gray-600 w-full rounded-[5px] overflow-hidden bg-gray-50 ' >
                     <h2 className='p-[0.2rem] text-[1.3rem] bg-[#DFF1F8] ' >Payment Summary</h2>
                     <div className='flex w-full justify-between  border-t-[1px]  border-gray-600   ' >

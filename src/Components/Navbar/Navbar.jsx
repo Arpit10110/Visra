@@ -11,12 +11,12 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 bg-white z-50 flex h-[15vh] justify-between pr-8 pl-8 items-center below-sm:pr-2 below-sm:pl-3 shadow-md">
-        <div className="w-[7%] below-sm:w-[20%]">
+      <nav className="sticky top-0 bg-white z-50 flex h-[15vh] justify-between pr-8 pl-8 items-center below-sm:pr-2 below-sm:pl-3 shadow-md below-sm:h-auto below-sm:p-[1rem] ">
+        <div className="w-[7%]  below-tab:w-[13%]  ">
           <Image className="w-full" src={Logo} alt="Visra" />
         </div>
 
-        <div className="navlinks flex gap-9 text-[1.1rem] below-sm:hidden">
+        <div className="navlinks flex gap-9 text-[1.1rem] below-sm:hidden below-tab:text-[1rem] below-tab:gap-5 ">
           <Link className="hover:text-red-400" href={"/"}>Home</Link>
           <Link className="hover:text-red-400" href={"/buycertificate"}>Buy Certificate</Link>
           <Link className="hover:text-red-400" href={"/doucment-signer"}>Document Signer</Link>

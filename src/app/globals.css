@@ -11,8 +11,16 @@
 html{
     font-size: 100%;
 }
+.css-15k6ek6-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 0rem !important;
+}
+@media only screen and (width<= 880px) {
+    html{
+        font-size: 85%;
+    }
+}
 
-@media only screen and (width<= 600px) {
+@media only screen and (width<= 650px) {
     html{
         font-size: 80%;
     }

@@ -30,7 +30,7 @@ const CheckoutUpperCard = ({ profile, assistance, classify, token, years }) => {
 
   return (
     <>
-      <div className="w-[90%] flex m-auto mt-[3rem] p-[1rem] justify-between border-[2px] border-blue-400 items-center rounded-[0.5rem] bg-blue-100 below-sm:w-fit below-sm:p-[0rem] below-sm:py-[1rem] below-sm:flex-col below-sm:items-baseline below-sm:gap-[1rem] below-sm:px-[0.5rem] ">
+      <div className="w-[95%] below-sm:w-[95%] flex m-auto mt-[3rem] p-[1rem] justify-between border-[2px] border-blue-400 items-center rounded-[0.5rem] bg-blue-100  below-sm:p-[0rem] below-sm:py-[1rem] below-sm:flex-col below-sm:items-baseline below-sm:gap-[1rem] below-sm:px-[0.5rem] ">
         <div className="flex gap-[1rem] items-center below-sm:items-baseline below-sm:flex-col  " >
           <div className="bg-blue-500 p-[0.4rem] text-[1.1rem] pt-[1rem] pb-[1rem] border-[3px] border-green-500   text-white flex items-center justify-center flex-col gap-[0.2rem] rounded-[0.5rem] "  >
             <GroupIcon className="!text-[1.7rem]"  />

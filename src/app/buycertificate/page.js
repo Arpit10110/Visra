@@ -119,7 +119,7 @@ const page = () => {
 
   const DGFT_DSC = [
     {
-      productType: "Sign & Encryprion",
+      productType: "Sign",
       validity: 1,
       Tocken: true,
       Assistance_Service: true,
@@ -458,9 +458,10 @@ const page = () => {
     <>
       <Navbar />
       <Image
-        className="below-sm:hidden"
+        className="below-sm:hidden object-cover below-tab:h-[30vh] below-tab:w-full "
         src={buyCertiBanner}
         alt="buyCertiBanner"
+
       />
       <h1 className="hidden below-sm:flex below-sm:mt-[2rem] below-sm:text-[2rem] below-sm:border-b-[3px] w-fit  below-sm:border-red-300 below-sm:ml-[1rem] font-semibold text-blue-400 ">
         👉Buy Certificate
@@ -487,7 +488,7 @@ const page = () => {
               </button>
               <button
                 onClick={() => {
-                  setClassify("Sign & Encryprion");
+                  setClassify("Sign");
                   setProfile("IET");
                 }}
                 className={profile === "IET" ? "active" : ""}
@@ -530,9 +531,9 @@ const page = () => {
             <h3>Classify</h3>
             <div className="sector-btn-div">
               <button
-                onClick={() => profile !== "IET" && setClassify("Sign")}
+                onClick={() =>setClassify("Sign")}
                 className={
-                  classify === "Sign" && profile !== "IET" ? "active" : ""
+                  classify === "Sign" ? "active" : ""
                 }
                 disabled={profile === "IET"}
               >
@@ -540,8 +541,8 @@ const page = () => {
                 Sign
               </button>
               <button
-                onClick={() => setClassify("Sign & Encryprion")}
-                className={classify === "Sign & Encryprion" ? "active" : ""}
+                onClick={() =>  profile !== "IET" &&  setClassify("Sign & Encryprion")}
+                className={classify === "Sign & Encryprion" && profile !== "IET" ? "active" : ""}
               >
                 <LockPersonIcon />
                 Sign & Encrypt

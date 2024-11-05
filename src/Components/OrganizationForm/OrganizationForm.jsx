@@ -2,6 +2,11 @@
 import { useState,useEffect } from "react";
 import axios from "axios"
 import { useRouter } from "next/navigation";
+//material ui
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+
 const OrganizationForm = ({cart,fullcart}) => {
     const router=useRouter();
     const [Name,SetName] = useState("");
@@ -18,7 +23,11 @@ const OrganizationForm = ({cart,fullcart}) => {
     const [departname,Setdepartname] = useState("");
     const [TotalAmount,SetTotalAmount] = useState(0);
 
-
+    const handleChange = (event) => {
+        SetOrgtype(event.target.value);
+      };
+    
+    
     const SubmitForm = async(paymentid)=>{
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
         let gstno ;
@@ -46,9 +55,7 @@ const OrganizationForm = ({cart,fullcart}) => {
             console.log(error)
         }
     }
-
-
-
+    
     const createpayment = async(e)=>{
         e.preventDefault();
         const amount = TotalAmount
@@ -91,8 +98,7 @@ const OrganizationForm = ({cart,fullcart}) => {
             }
         };
         const rzp1 = new window.Razorpay(options);
-        rzp1.open();
-        
+        rzp1.open();     
     }
 
     const sendnotifation = async()=>{
@@ -118,14 +124,14 @@ const OrganizationForm = ({cart,fullcart}) => {
         tt= 338.98+tt;
         }
         SetTotalAmount(tt);
+        if( fullcart[0].profile==="Government"){
+            SetOrgtype("Government");
+        }
   }, [])
-  
-
-
   return (
     <>
-    <form onSubmit={createpayment} className="flex justify-between m-auto w-[90%] pt-[3rem] pb-[5rem] "   >
-        <div className=' w-[50%] rounded-[5px] overflow-hidden '>
+    <form onSubmit={createpayment} className="flex justify-between m-auto w-[95%] pt-[3rem] pb-[5rem] below-sm:w-[100%] below-sm:items-center below-sm:gap-[3rem] below-sm:flex-col below-tab:w-[99%] "  >
+        <div className=' w-[50%] rounded-[5px] overflow-hidden below-sm:w-[95%] below-tab:w-[63%] '>
             <h1 className='bg-blue-500 text-white p-[0.2rem] ' >Personal & Address Details</h1>
             <div className='w-full p-[1rem] bg-gray-100 pt-[1rem]  flex flex-col gap-[1rem]  ' >
             <div className='text-[1.2rem] flex flex-col gap-[0.2rem]  ' >
@@ -155,7 +161,20 @@ const OrganizationForm = ({cart,fullcart}) => {
             <div className='text-[1.2rem] flex  gap-[0.2rem]  w-full justify-between '>
                     <div className='w-[48%]'>
                     <h3>Organization type</h3>
-                    <input value={Orgtype} onChange={(e)=>SetOrgtype(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
+                    {
+                        fullcart[0].profile==="Government"?
+                        <Select className="w-full bg-white !p-[0.5rem] !text-[1.1rem] "  value={Orgtype} onChange={handleChange}>
+                        <MenuItem value={"Government"}>Government</MenuItem>
+                     </Select>:
+                    <Select className="w-full bg-white !p-[0.5rem] !text-[1.1rem] "  value={Orgtype} onChange={handleChange}>
+                        <MenuItem value={"Proprietorship"}>Proprietorship</MenuItem>
+                        <MenuItem value={"Partnership"}>Partnership</MenuItem>
+                        <MenuItem value={"Limited Liability Partnership (LLP)"}>Limited Liability Partnership (LLP)</MenuItem>
+                        <MenuItem value={"Corporate Entities"}>Corporate Entities</MenuItem>
+                        <MenuItem value={"Trust/NGO"}>Trust/NGO</MenuItem>
+                        <MenuItem value={"Public Sector Undertaking (PSU)"}>Public Sector Undertaking (PSU)</MenuItem>
+                     </Select>
+                    }
                     </div>
                     <div className='w-[48%]'>
                     <h3>Gst number(optional)</h3>
@@ -188,7 +207,7 @@ const OrganizationForm = ({cart,fullcart}) => {
                 </div>
             </div>
         </div>
-        <div className='w-[30%] flex flex-col gap-[1rem] ' >
+        <div className='w-[40%] flex flex-col gap-[1rem] below-sm:w-[95%] below-tab:w-[35%] ' >
             <div className='border-[1px] border-gray-600 w-full rounded-[5px] overflow-hidden bg-gray-50 ' >
                 <h2 className='p-[0.2rem] text-[1.3rem] bg-[#DFF1F8] ' >Payment Summary</h2>
                 <div className='flex w-full justify-between  border-t-[1px]  border-gray-600   ' >

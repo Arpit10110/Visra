@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'below-sm': { 'max': '600px' }, // custom breakpoint for below 600px
+        'below-tab': { 'max': '880px' }, // custom breakpoint for below 600px
+        'below-sm': { 'max': '650px' },
       },
       colors: {
         "primary-blue": "rgb(39, 129, 239)", // corrected RGB syntax
