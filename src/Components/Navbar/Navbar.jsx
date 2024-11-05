@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="sticky top-0 bg-white z-50 flex h-[15vh] justify-between pr-8 pl-8 items-center below-sm:pr-2 below-sm:pl-3 shadow-md below-sm:h-auto below-sm:p-[1rem] ">
-        <div className="w-[7%]  below-tab:w-[13%]  ">
+        <div className="w-[7%]  below-tab:w-[15%]  ">
           <Image className="w-full" src={Logo} alt="Visra" />
         </div>
 
@@ -31,7 +31,7 @@ const Navbar = () => {
               setOpen(true);
             }}
           >
-            <MenuIcon className="text-[3.5rem]" />
+            <MenuIcon className="!text-[3rem]" />
           </button>
           <Drawer
             anchor={"right"}
