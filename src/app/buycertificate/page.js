@@ -23,24 +23,39 @@ import DangerousIcon from "@mui/icons-material/Dangerous";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { letterSpacing } from "@mui/system";
 const page = () => { 
   const dispatch = useDispatch();
   const router=useRouter();
   const [profile, setProfile] = useState("Individual");
   const [classify, setClassify] = useState("Sign");
+  const [formate, setformate] = useState("Soft Copy");
   const [years, setYears] = useState(1);
   const [token, setToken] = useState(true); // USB Token or No Token
   const [assistance, setAssistance] = useState(true); // Assistance Service or No Assistance
 
   const Buycertificate = () => {
-    const purchaseDetails = {
-      profile,
-      classify,
-      years,
-      token,
-      assistance,
-      price: filteredDSC,
-    };
+    let purchaseDetails;
+    if(profile === "Document_Signer"){
+       purchaseDetails = {
+        profile,
+        classify:formate,
+        years,
+        token,
+        assistance,
+        price: filteredDSC,
+      };
+    }else{
+       purchaseDetails = {
+        profile,
+        classify,
+        years,
+        token,
+        assistance,
+        price: filteredDSC,
+      };
+    }
+    
     dispatch({
       type: "addtocart",
       payload: purchaseDetails,
@@ -527,6 +542,29 @@ const page = () => {
             </div>
           </div>
           {/* Classify */}
+          {
+            profile == "Document_Signer"?
+            <div className="section">
+            <h3>FILE FORMAT</h3>
+            <div className="sector-btn-div">
+              <button
+                onClick={() =>setformate("Soft Copy")}
+                className={
+                  formate === "Soft Copy" ? "active" : ""
+                }
+              >
+                <ReceiptLongIcon />
+                Soft Copy
+              </button>
+              <button
+                onClick={() =>setformate("For HSM")}
+                className={formate === "For HSM"  ? "active" : ""}
+              >
+                <LockPersonIcon />
+                For HSM
+              </button>
+            </div>
+          </div>:
           <div className="section">
             <h3>Classify</h3>
             <div className="sector-btn-div">
@@ -549,6 +587,7 @@ const page = () => {
               </button>
             </div>
           </div>
+          }
           {/* Year Selection */}
           <div className="section">
             <h3>Validity (Years)</h3>

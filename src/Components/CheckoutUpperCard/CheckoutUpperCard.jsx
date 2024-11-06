@@ -37,17 +37,10 @@ const CheckoutUpperCard = ({ profile, assistance, classify, token, years }) => {
             <h2>{showPrfofile}</h2>
           </div>
           <div className="flex gap-[1rem] items-center bg-white h-fit p-[0.2rem] text-[1rem] rounded-[0.2rem] ">
-            {classify == "Sign" ? (
-              <h4 className=" flex gap-[2px] border-r-[2px] pr-[0.3rem] border-blue-300  " >
-                <ReceiptLongIcon />
-                Sign
-              </h4>
-            ) : (
               <h4 className="flex gap-[2px] border-r-[2px] pr-[0.3rem] border-blue-300  " >
                 <LockPersonIcon />
-                Sign&Encrypt
+                {classify}
               </h4>
-            )}
             <h4 className=" flex gap-[2px] border-r-[2px] pr-[0.3rem] border-blue-300  ">
               <CalendarMonthIcon />
               {years}
