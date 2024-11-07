@@ -2,6 +2,7 @@
 import { useState,useEffect } from "react";
 import axios from "axios"
 import { useRouter } from "next/navigation";
+import ImageUpload from "../ImageUpload/ImageUpload";
 const IndidvidualForm = ({cart,fullcart}) => {
     const router=useRouter();
     const [Name,SetName] = useState("");
@@ -143,6 +144,13 @@ const IndidvidualForm = ({cart,fullcart}) => {
                         <input onChange={(e)=>SetState(e.target.value)} value={State} className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                         </div>
                     </div>
+                    <div className="flex justify-between items-center w-[45%]"  >
+                        <h2>Upload Adhar Card :-</h2><ImageUpload/>
+                    </div>
+                    <div className="flex justify-between items-center w-[45%]">
+                        <h2 >Upload Pan Card :-</h2><ImageUpload/>
+                    </div>
+                    
                 </div>
             </div>
             <div className='w-[40%] flex flex-col gap-[1rem] below-sm:w-[95%] below-tab:w-[35%] ' >

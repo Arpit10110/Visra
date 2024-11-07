@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 //material ui
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 
 const OrganizationForm = ({cart,fullcart}) => {
@@ -205,6 +206,12 @@ const OrganizationForm = ({cart,fullcart}) => {
                     <input value={State} onChange={(e)=>SetState(e.target.value)}  className='w-[100%] p-[0.3rem] text-[1.2rem]  border-[1px]  border-black rounded-[0.3rem] ' type="text" required/>
                     </div>
                 </div>
+                <div className="flex justify-between items-center w-[45%]"  >
+                        <h2>Upload Adhar Card :-</h2><ImageUpload/>
+                    </div>
+                    <div className="flex justify-between items-center w-[45%]">
+                        <h2 >Upload Pan Card :-</h2><ImageUpload/>
+                    </div>
             </div>
         </div>
         <div className='w-[40%] flex flex-col gap-[1rem] below-sm:w-[95%] below-tab:w-[35%] ' >

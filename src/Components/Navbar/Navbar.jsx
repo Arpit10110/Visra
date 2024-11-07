@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="navlinks flex gap-9 text-[1.1rem] below-sm:hidden below-tab:text-[1rem] below-tab:gap-5 ">
           <Link className="hover:text-red-400" href={"/"}>Home</Link>
           <Link className="hover:text-red-400" href={"/buycertificate"}>Buy Certificate</Link>
-          <Link className="hover:text-red-400" href={"/doucment-signer"}>Document Signer</Link>
+          <Link className="hover:text-red-400" href={"/doucmentsigner"}>Document Signer</Link>
           <Link className="hover:text-red-400" href={"/download"}>Download</Link>
           <Link className="hover:text-red-400" href={"/become-a-partner"}>Become a Partner</Link>
           <Link className="hover:text-red-400" href={"/contact"}>Contact</Link>
