@@ -43,7 +43,7 @@ const Navbar = () => {
             <div className="flex flex-col w-[100%] bg-gray-700 text-white gap-[2rem] p-[1rem] h-[100vh] justify-center text-[1.5rem]">
               <Link href="/" onClick={() => setOpen(false)}>Home</Link>
               <Link href="/buycertificate" onClick={() => setOpen(false)}>Buy Certificate</Link>
-              <Link href="/doucment-signer" onClick={() => setOpen(false)}>Document Signer</Link>
+              <Link href="/doucmentsigner" onClick={() => setOpen(false)}>Document Signer</Link>
               <Link href="/download" onClick={() => setOpen(false)}>Download</Link>
               <Link href="/become-a-partner" onClick={() => setOpen(false)}>Become a Partner</Link>
               <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
