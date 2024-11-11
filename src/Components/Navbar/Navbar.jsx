@@ -21,7 +21,7 @@ const Navbar = () => {
           <Link className="hover:text-red-400" href={"/buycertificate"}>Buy Certificate</Link>
           <Link className="hover:text-red-400" href={"/doucmentsigner"}>Document Signer</Link>
           <Link className="hover:text-red-400" href={"/download"}>Download</Link>
-          <Link className="hover:text-red-400" href={"/become-a-partner"}>Become a Partner</Link>
+          <Link className="hover:text-red-400" href={"/becomepartner"}>Become a Partner</Link>
           <Link className="hover:text-red-400" href={"/contact"}>Contact</Link>
         </div>
 
@@ -45,7 +45,7 @@ const Navbar = () => {
               <Link href="/buycertificate" onClick={() => setOpen(false)}>Buy Certificate</Link>
               <Link href="/doucmentsigner" onClick={() => setOpen(false)}>Document Signer</Link>
               <Link href="/download" onClick={() => setOpen(false)}>Download</Link>
-              <Link href="/become-a-partner" onClick={() => setOpen(false)}>Become a Partner</Link>
+              <Link href="/becomepartner" onClick={() => setOpen(false)}>Become a Partner</Link>
               <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
             </div>
           </Drawer>
