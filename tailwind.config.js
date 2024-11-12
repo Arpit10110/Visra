@@ -14,6 +14,7 @@ export default withUt({
     extend: {
       screens: {
         'below-tab': { 'max': '880px' }, // custom breakpoint for below 600px
+        'hidde-nav': { 'max': '750px' }, // custom breakpoint for below 600px
         'below-sm': { 'max': '650px' },
       },
       colors: {
