@@ -14,7 +14,9 @@ const IndidvidualForm = ({cart,fullcart}) => {
     const [State,SetState] = useState("");
     const [PostalCode,SetPostalCode] = useState("");
     const [TotalAmount,SetTotalAmount] = useState(0);
- 
+    const [AdharImg,SetAdharImg] = useState("NA");
+    const [PanImg,SetPanImg] = useState("NA");
+    const [OtherImg,SetOtherImg] = useState("NA");
     const SubmitForm = async(paymentid)=>{
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode;
         try {
@@ -25,6 +27,9 @@ const IndidvidualForm = ({cart,fullcart}) => {
                 address:sendaddres,
                 cart:fullcart,
                 paymentid:paymentid,
+                adharimg:AdharImg,
+                panimg:PanImg,
+                otherimg:OtherImg
             });
             console.log(data);
             sendnotifation();
@@ -91,6 +96,17 @@ const IndidvidualForm = ({cart,fullcart}) => {
         }
     }
 
+    const setAdharimage = (url)=>{
+        SetAdharImg(url);
+    }
+    const setPanimage = (url)=>{
+        SetPanImg(url);
+    }
+
+    const setOtherimage = (url)=>{
+        SetOtherImg(url);
+    }
+
     useEffect(() => {
         let tt=cart.Total_Amount;
         if(fullcart[0].token== true){
@@ -145,10 +161,25 @@ const IndidvidualForm = ({cart,fullcart}) => {
                         </div>
                     </div>
                     <div className="flex justify-between items-center w-[45%]"  >
-                        <h2>Upload Adhar Card :-</h2><ImageUpload/>
+                        <h2>Upload Adhar Card :-</h2>
+                        {
+                            AdharImg==="NA"?<ImageUpload subAdhar={setAdharimage} required/>:
+                            <h1 className=" rounded-md border-[1px] border-green-600 px-[1rem] py-[0.5rem] bg-green-600 text-white " >Image Uploaded</h1>
+                        }
                     </div>
                     <div className="flex justify-between items-center w-[45%]">
-                        <h2 >Upload Pan Card :-</h2><ImageUpload/>
+                        <h2 >Upload Pan Card :-</h2>
+                        {
+                            PanImg==="NA"?<ImageUpload subAdhar={setPanimage} required/>:
+                            <h1 className=" rounded-md border-[1px] border-green-600 px-[1rem] py-[0.5rem] bg-green-600 text-white " >Image Uploaded</h1>
+                        }
+                    </div>
+                    <div className="flex justify-between items-center w-[45%]">
+                        <h2 >Upload Others:-</h2>
+                        {
+                            OtherImg==="NA"?<ImageUpload subAdhar={setOtherimage} />:
+                            <h1 className=" rounded-md border-[1px] border-green-600 px-[1rem] py-[0.5rem] bg-green-600 text-white " >Image Uploaded</h1>
+                        }
                     </div>
                     
                 </div>

@@ -23,13 +23,20 @@ const PriceSchema = new mongoose.Schema({
     totalprice: { type: Number, required: true },
 });
 
+const ImageSchema = new mongoose.Schema({
+    adhar: { type: String, required: true },
+    pan: { type: String, required: true },
+    other: { type: String, required: true },
+});
+
 const Schema = new mongoose.Schema({
     order: { type: OrderSchema, required: true },
     user: { type: UserSchema, required: true },
     price: { type: PriceSchema, required: true },
-    paymentid:{ type: String, required: true}
+    paymentid:{ type: String, required: true},
+    image: { type: ImageSchema, required: true}
 });
 
-const VisraOrderModel = mongoose.models.IndividualOrderModel || mongoose.model('IndividualOrderModel', Schema);
+const VisraOrderModel = mongoose.models.IndOrderModelA || mongoose.model('IndOrderModelA', Schema);
 export default VisraOrderModel;
 

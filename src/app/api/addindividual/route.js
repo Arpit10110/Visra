@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const POST = async(req)=>{
     try {
         await connectdb();
-        const {name,phone,email,address,cart,paymentid} =await req.json();
+        const {name,phone,email,address,cart,paymentid,adharimg,panimg,otherimg} =await req.json();
         let tt=cart[0].price.Total_Amount;
         if(cart[0].token== true){
             tt= 423.72+tt;
@@ -34,11 +34,17 @@ export const POST = async(req)=>{
             gst:cart[0].price.Gst,
             totalprice:tt,
         }
+        const imginfo = {
+            adhar:adharimg,
+            pan:panimg,
+            other:otherimg
+        }
         await VisraOrderModel.create({
             order:orderinfo,
             user:userinfo,
             price:priceinfo,
-            paymentid:paymentid
+            paymentid:paymentid,
+            image:imginfo
         })
         return(
             NextResponse.json({

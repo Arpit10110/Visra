@@ -2,7 +2,10 @@
 
 import { UploadButton } from "@/utils/uploadthing"
 
-const ImageUpload = () => {
+const ImageUpload = ({subAdhar}) => {
+  const hh = async(url)=>{
+    subAdhar(url);
+  }
   return (
     <>
     <UploadButton
@@ -16,6 +19,7 @@ const ImageUpload = () => {
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
           console.log("Files: ", res);
+          hh(res[0].url);
           alert("Upload Completed");
         }}
         onUploadError={(error) => {
