@@ -195,10 +195,20 @@ const IndidvidualForm = ({cart,fullcart,backloader}) => {
                         <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600  ' >Digital Signature (DSC)</h2>
                         <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center '>₹{cart.DSC_Price}</h2>
                     </div>
+                    {
+                    fullcart[0].token ? 
                     <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
-                        <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >Digital Signature (DSC)</h2>
-                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{cart.DSC_Price}</h2>
-                    </div>
+                        <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >USB Token Price</h2>
+                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹423.72</h2>
+                    </div>: <></>
+                }
+                {
+                    fullcart[0].assistance == true ? 
+                    <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
+                        <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >Assistance Price</h2>
+                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹338.98</h2>
+                    </div>: <></>
+                }
                     <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
                         <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >GST (18%)</h2>
                         <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center '>₹{cart.Gst}</h2>
