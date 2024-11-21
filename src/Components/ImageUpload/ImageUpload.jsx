@@ -18,7 +18,7 @@ const ImageUpload = ({subAdhar}) => {
           }}
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
-          console.log("Files: ", res);
+          // console.log("Files: ", res);
           hh(res[0].url);
           alert("Upload Completed");
         }}

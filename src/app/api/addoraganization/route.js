@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const POST = async(req)=>{
     try {
         await connectdb();
-        const {name,phone,email,address,cart,paymentid,orgname,orgtype,departname,gstno} =await req.json();
+        const {name,phone,email,address,cart,paymentid,orgname,orgtype,departname,gstno,adharimg,panimg,otherimg} =await req.json();
         let tt=cart[0].price.Total_Amount;
         if(cart[0].token== true){
             tt= 423.72+tt;
@@ -39,12 +39,20 @@ export const POST = async(req)=>{
             orgtype:orgtype,
             gstno:gstno
         }
+
+        const imginfo = {
+            adhar:adharimg,
+            pan:panimg,
+            other:otherimg
+        }
+
         await OrgOrderModel.create({
             order:orderinfo,
             user:userinfo,
             price:priceinfo,
             oragdetail:orginfo,
-            paymentid:paymentid
+            paymentid:paymentid,
+            image:imginfo
         })
         return(
             NextResponse.json({

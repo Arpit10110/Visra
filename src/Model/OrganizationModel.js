@@ -30,13 +30,20 @@ const Oraganization = new mongoose.Schema({
     gstno: { type: String, required: true },
 });
 
+const ImageSchema = new mongoose.Schema({
+    adhar: { type: String, required: true },
+    pan: { type: String, required: true },
+    other: { type: String, required: true },
+});
+
 const Schema = new mongoose.Schema({
     order: { type: OrderSchema, required: true },
     user: { type: UserSchema, required: true },
     price: { type: PriceSchema, required: true },
     oragdetail: { type: Oraganization, required: true },
-    paymentid:{ type: String, required: true}
+    paymentid:{ type: String, required: true},
+    image: { type: ImageSchema, required: true}
 })
 
-const OrgOrderModel = mongoose.models.OrganizationOrderModel || mongoose.model('OrganizationOrderModel', Schema);
+const OrgOrderModel = mongoose.models.OrgModelA || mongoose.model('OrgModelA', Schema);
 export default OrgOrderModel;

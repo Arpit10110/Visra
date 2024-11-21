@@ -3,7 +3,8 @@ import { useState,useEffect } from "react";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import ImageUpload from "../ImageUpload/ImageUpload";
-const IndidvidualForm = ({cart,fullcart}) => {
+
+const IndidvidualForm = ({cart,fullcart,backloader}) => {
     const router=useRouter();
     const [Name,SetName] = useState("");
     const [Email,SetEmail] =useState("");
@@ -17,6 +18,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
     const [AdharImg,SetAdharImg] = useState("NA");
     const [PanImg,SetPanImg] = useState("NA");
     const [OtherImg,SetOtherImg] = useState("NA");
+
     const SubmitForm = async(paymentid)=>{
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode;
         try {
@@ -59,6 +61,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
                         razorpay_signature:response.razorpay_signature
                     }) 
                     if(data.success == true){
+                        backloader(true);
                         SubmitForm(data.paymentId)
                     }
                } catch (error) {
@@ -90,6 +93,7 @@ const IndidvidualForm = ({cart,fullcart}) => {
                 email:Email,
                 message:`New Order placed successfully by ${Name}`
             })
+        backloader(false);
             router.push("/successorder")
         } catch (error) {
             console.log(error)

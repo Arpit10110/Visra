@@ -7,10 +7,16 @@ import IndidvidualForm from '@/Components/IndidvidualForm/IndidvidualForm';
 import OrganizationForm from '@/Components/OrganizationForm/OrganizationForm';
 import { usePersistCart } from '@/Store/Reducer';
 import Script from 'next/script';
+//material ui
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Page = () => {
   const [showIndividualForm, setShowIndividualForm] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const { cart } = useSelector(state => state.Visra);
+  const [open, setOpen] = useState(false);
+
   usePersistCart(cart);
 
   useEffect(() => {
@@ -27,8 +33,20 @@ const Page = () => {
 
   if (!isMounted) return null; // Prevent rendering until client-side mount
 
+
+  const isbackloading = (val)=>{
+      setOpen(val)
+  }
+
   return (
     <>
+     <Backdrop
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
       <Navbar />
       <div>
     <Script src="https://checkout.razorpay.com/v1/checkout.js"  />
@@ -42,9 +60,9 @@ const Page = () => {
               years={cart[0].years} 
             />
             {showIndividualForm ? (
-              <IndidvidualForm fullcart={cart} cart={cart[0].price} />
+              <IndidvidualForm fullcart={cart} cart={cart[0].price} backloader={isbackloading} />
             ) : (
-              <OrganizationForm fullcart={cart} cart={cart[0].price} />
+              <OrganizationForm fullcart={cart} cart={cart[0].price} backloader={isbackloading} />
             )}
           </>
         )}

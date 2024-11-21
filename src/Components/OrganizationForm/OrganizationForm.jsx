@@ -8,7 +8,7 @@ import Select from '@mui/material/Select';
 import ImageUpload from "../ImageUpload/ImageUpload";
 
 
-const OrganizationForm = ({cart,fullcart}) => {
+const OrganizationForm = ({cart,fullcart,backloader}) => {
     const router=useRouter();
     const [Name,SetName] = useState("");
     const [Email,SetEmail] =useState("");
@@ -23,11 +23,26 @@ const OrganizationForm = ({cart,fullcart}) => {
     const [Gstno,SetGstno] = useState("");
     const [departname,Setdepartname] = useState("");
     const [TotalAmount,SetTotalAmount] = useState(0);
+    const [AdharImg,SetAdharImg] = useState("NA");
+    const [PanImg,SetPanImg]=useState("NA");
+    const [OtherImg,SetOtherImg]=useState("NA")
 
     const handleChange = (event) => {
         SetOrgtype(event.target.value);
       };
-    
+      
+    const adharImg = (url)=>{
+        SetAdharImg(url);
+    }  
+
+    const panImg = (url)=>{
+        SetPanImg(url);
+    }  
+
+    const otherImg = (url)=>{
+        SetOtherImg(url);
+    }  
+
     
     const SubmitForm = async(paymentid)=>{
         const sendaddres = Landmark + "," + Address + ","+ City + ","+State+"," + PostalCode 
@@ -48,7 +63,10 @@ const OrganizationForm = ({cart,fullcart}) => {
                 orgname:Orgname,
                 orgtype:Orgtype,
                 departname:departname,
-                gstno:gstno
+                gstno:gstno,
+                adharimg:AdharImg,
+                panimg:PanImg,
+                otherimg:OtherImg
             });
             console.log(data);
             sendnotifation();
@@ -80,6 +98,7 @@ const OrganizationForm = ({cart,fullcart}) => {
                     }) 
                     console.log(data);
                     if(data.success == true){
+                        backloader(true);
                         SubmitForm(data.paymentId)
                     }
                } catch (error) {
@@ -110,6 +129,7 @@ const OrganizationForm = ({cart,fullcart}) => {
                 email:Email,
                 message:`New Order placed successfully by ${Name}`
             })
+            backloader(false);
             router.push("/successorder")
         } catch (error) {
             console.log(error)
@@ -207,10 +227,25 @@ const OrganizationForm = ({cart,fullcart}) => {
                     </div>
                 </div>
                 <div className="flex justify-between items-center w-[45%]"  >
-                        <h2>Upload Adhar Card :-</h2><ImageUpload/>
+                <h2>Upload Adhar Card :-</h2>
+                    {
+                        AdharImg==="NA"?<ImageUpload subAdhar={adharImg}/>:
+                        <h1 className=" rounded-md border-[1px] border-green-600 px-[1rem] py-[0.5rem] bg-green-600 text-white " >Image Uploaded</h1>
+                    }
                     </div>
-                    <div className="flex justify-between items-center w-[45%]">
-                        <h2 >Upload Pan Card :-</h2><ImageUpload/>
+                <div className="flex justify-between items-center w-[45%]">
+                        <h2 >Upload Pan Card :-</h2>
+                        {
+                        PanImg==="NA"?<ImageUpload subAdhar={panImg}/>:
+                        <h1 className=" rounded-md border-[1px] border-green-600 px-[1rem] py-[0.5rem] bg-green-600 text-white " >Image Uploaded</h1>
+                        }
+                    </div>
+                <div className="flex justify-between items-center w-[45%]">
+                        <h2 >Upload Others :-</h2>
+                        {
+                        OtherImg==="NA"?<ImageUpload subAdhar={otherImg}/>:
+                        <h1 className=" rounded-md border-[1px] border-green-600 px-[1rem] py-[0.5rem] bg-green-600 text-white " >Image Uploaded</h1>
+                        }
                     </div>
             </div>
         </div>
@@ -221,17 +256,28 @@ const OrganizationForm = ({cart,fullcart}) => {
                     <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600  ' >Digital Signature (DSC)</h2>
                     <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center '>₹{cart.DSC_Price}</h2>
                 </div>
-                <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
-                    <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >Digital Signature (DSC)</h2>
-                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{cart.DSC_Price}</h2>
-                </div>
+                {
+                    fullcart[0].token ? 
+                    <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
+                        <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >USB Token Price</h2>
+                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹423.72</h2>
+                    </div>: <></>
+                }
+                {
+                    fullcart[0].assistance == true ? 
+                    <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
+                        <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >Assistance Price</h2>
+                        <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹338.98</h2>
+                    </div>: <></>
+                }
+
                 <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
                     <h2 className='w-[70%] p-[0.3rem] text-[1.1rem]  border-r-[1px] border-gray-600 ' >GST (18%)</h2>
                     <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center '>₹{cart.Gst}</h2>
                 </div>
                 <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
                     <h2 className='w-[70%] p-[0.3rem] text-[1.1rem] font-semibold  border-r-[1px] border-gray-600 ' >Payable Amount</h2>
-                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{TotalAmount}</h2>
+                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{(TotalAmount).toFixed(2)}</h2>
                 </div>
             </div>
             <button type='submit' className='bg-blue-500 text-white text-[1.2rem] p-[0.3rem] rounded-[5px] ' >Pay Now</button>
