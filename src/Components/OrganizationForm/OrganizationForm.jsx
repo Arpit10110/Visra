@@ -144,7 +144,8 @@ const OrganizationForm = ({cart,fullcart,backloader}) => {
         if(fullcart[0].assistance == true){
         tt= 338.98+tt;
         }
-        SetTotalAmount(tt);
+        let x= tt.toFixed(1)
+        SetTotalAmount(x);
         if( fullcart[0].profile==="Government"){
             SetOrgtype("Government");
         }
@@ -277,7 +278,7 @@ const OrganizationForm = ({cart,fullcart,backloader}) => {
                 </div>
                 <div className='flex w-full justify-between  border-t-[1px]  border-gray-600  ' >
                     <h2 className='w-[70%] p-[0.3rem] text-[1.1rem] font-semibold  border-r-[1px] border-gray-600 ' >Payable Amount</h2>
-                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{(TotalAmount).toFixed(2)}</h2>
+                    <h2 className='w-[30%] p-[0.3rem] text-[1.1rem] text-center  '>₹{TotalAmount}</h2>
                 </div>
             </div>
             <button type='submit' className='bg-blue-500 text-white text-[1.2rem] p-[0.3rem] rounded-[5px] ' >Pay Now</button>
