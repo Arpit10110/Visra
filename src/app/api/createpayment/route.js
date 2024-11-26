@@ -7,6 +7,7 @@ const instance = new Razorpay({
   });
 export const POST = async(req)=>{
         const {amount} =await req.json();
+        console.log(amount);
         const options = {
             amount: Number(amount * 100), // amount in the smallest currency unit
             currency: "INR",

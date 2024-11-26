@@ -119,7 +119,8 @@ const IndidvidualForm = ({cart,fullcart,backloader}) => {
         if(fullcart[0].assistance == true){
         tt= 338.98+tt;
         }
-        SetTotalAmount(tt);
+        let x= tt.toFixed(1)
+        SetTotalAmount(x);
   }, [])
 
     return (
