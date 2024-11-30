@@ -83,7 +83,7 @@ const OrganizationForm = ({cart,fullcart,backloader}) => {
           })
           const options = {
             key: process.env.NEXT_PUBLIC_RazarPay_key_id, 
-            amount: order.amount,  
+            amount: TotalAmount,  
             currency: "INR",
             name: "Visra",
             description: "Test Transaction",

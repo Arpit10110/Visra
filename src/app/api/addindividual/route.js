@@ -32,7 +32,7 @@ export const POST = async(req)=>{
             assprice:cart[0].price.Asst_Service_Price,
             tokenprice:cart[0].price.Token_Price,
             gst:cart[0].price.Gst,
-            totalprice:tt,
+            totalprice:tt.toFixed(1),
         }
         const imginfo = {
             adhar:adharimg,
