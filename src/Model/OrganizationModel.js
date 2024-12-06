@@ -42,8 +42,9 @@ const Schema = new mongoose.Schema({
     price: { type: PriceSchema, required: true },
     oragdetail: { type: Oraganization, required: true },
     paymentid:{ type: String, required: true},
-    image: { type: ImageSchema, required: true}
+    image: { type: ImageSchema, required: true},
+    date:{type:String,required: true},
 })
 
-const OrgOrderModel = mongoose.models.OrgModelA || mongoose.model('OrgModelA', Schema);
+const OrgOrderModel = mongoose.models.OrgModelB || mongoose.model('OrgModelB', Schema);
 export default OrgOrderModel;

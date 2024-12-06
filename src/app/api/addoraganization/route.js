@@ -2,71 +2,100 @@ import connectdb from "@/dataBase";
 import OrgOrderModel from "@/Model/OrganizationModel";
 import { NextResponse } from "next/server";
 
-export const POST = async(req)=>{
-    try {
-        await connectdb();
-        const {name,phone,email,address,cart,paymentid,orgname,orgtype,departname,gstno,adharimg,panimg,otherimg} =await req.json();
-        let tt=cart[0].price.Total_Amount;
-        if(cart[0].token== true){
-            tt= 423.72+tt;
-           }
-        if(cart[0].assistance == true){
-           tt= 338.98+tt;
-           }
-        const userinfo = {
-            name:name,
-            phone:phone,
-            email:email,
-            address:address
-        }
-        const orderinfo = {
-            profile:cart[0].profile,
-            classify:cart[0].classify,
-            year:cart[0].years,
-            token:cart[0].token,
-            assistance:cart[0].assistance
-        }
-        const priceinfo = {
-            dscprice:cart[0].price.DSC_Price,
-            assprice:cart[0].price.Asst_Service_Price,
-            tokenprice:cart[0].price.Token_Price,
-            gst:cart[0].price.Gst,
-            totalprice:tt.toFixed(1),
-        }
-        const orginfo = {
-            departmentname:departname,
-            orgname:orgname,
-            orgtype:orgtype,
-            gstno:gstno
-        }
+// Helper function to format the date in IST
+const formatDate = (date) => {
+  return date
+    .toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(",", "");
+};
 
-        const imginfo = {
-            adhar:adharimg,
-            pan:panimg,
-            other:otherimg
-        }
+export const POST = async (req) => {
+  try {
+    await connectdb();
+    const {
+      name,
+      phone,
+      email,
+      address,
+      cart,
+      paymentid,
+      orgname,
+      orgtype,
+      departname,
+      gstno,
+      adharimg,
+      panimg,
+      otherimg,
+    } = await req.json();
 
-        await OrgOrderModel.create({
-            order:orderinfo,
-            user:userinfo,
-            price:priceinfo,
-            oragdetail:orginfo,
-            paymentid:paymentid,
-            image:imginfo
-        })
-        return(
-            NextResponse.json({
-                success: true,
-                message:"order successfully created",
-            })
-        )
-    } catch (error) {
-        return(
-            NextResponse.json({
-                success: false,
-                message:error,
-            })
-        )
+    let tt = cart[0].price.Total_Amount;
+    if (cart[0].token == true) {
+      tt = 423.72 + tt;
     }
-   
-} 
+    if (cart[0].assistance == true) {
+      tt = 338.98 + tt;
+    }
+
+    const userinfo = {
+      name: name,
+      phone: phone,
+      email: email,
+      address: address,
+    };
+    const orderinfo = {
+      profile: cart[0].profile,
+      classify: cart[0].classify,
+      year: cart[0].years,
+      token: cart[0].token,
+      assistance: cart[0].assistance,
+    };
+    const priceinfo = {
+      dscprice: cart[0].price.DSC_Price,
+      assprice: cart[0].price.Asst_Service_Price,
+      tokenprice: cart[0].price.Token_Price,
+      gst: cart[0].price.Gst,
+      totalprice: tt.toFixed(1),
+    };
+    const orginfo = {
+      departmentname: departname,
+      orgname: orgname,
+      orgtype: orgtype,
+      gstno: gstno,
+    };
+    const imginfo = {
+      adhar: adharimg,
+      pan: panimg,
+      other: otherimg,
+    };
+
+    const formattedDate = formatDate(new Date());
+
+    await OrgOrderModel.create({
+      order: orderinfo,
+      user: userinfo,
+      price: priceinfo,
+      oragdetail: orginfo,
+      paymentid: paymentid,
+      image: imginfo,
+      date: formattedDate,
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "Order successfully created",
+    });
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+      message: error,
+    });
+  }
+};
